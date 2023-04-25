@@ -9,56 +9,98 @@
     <title>Docuent</title>
 </head>
 
-<body>
+<body onload="init()" class="main-layout">
 
     <header class="main-header">
-        <div class="logo"></div>
+        <div class="logo">LOGO</div>
         <nav class="main-nav">
-            <button class="btn btn-galery"></button>
-            <button class="btn btn-edit"></button>
-            <button class="btn btn-saved"></button>
-            <button class="btn btn-about"></button>
+            <button class="main-nav-btn btn-galery"></button>
+            <button class="main-nav-btn btn-edit"></button>
+            <button class="main-nav-btn btn-saved"></button>
+            <button class="main-nav-btn btn-about"></button>
         </nav>
     </header>
 
     <main class="main-content">
 
-        <section class="nav-funcs">
+        <div class="gallery-page" hidden>
+            <section class="nav-funcs">
 
-            <div class="search-options">
-                <input list="keys" type="list" class="search-keys" name="search-keys" placeholder="Search">
-                <datalist id="keys" class="search-key">
-                    <option value="All">All</option>
-                    <option value="Happy">Happy</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
-                    <option value="Human">Human</option>
-                </datalist>
+                <div class="search-options">
+                    <input list="keys" type="list" class="search-keys" name="search-keys" placeholder="Search">
+                    <datalist id="keys" class="search-key">
+                        <option value="All">All</option>
+                        <option value="Happy">Happy</option>
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Human">Human</option>
+                    </datalist>
+                </div>
+
+                <div class="keywords-holder">
+                    <button class="btn-key"> Happy</button>
+                    <button class="btn-key">Dog</button>
+                    <button class="btn-key">Cat</button>
+                    <button class="btn-key">Human</button>
+                    <button class="btn-key">Animal</button>
+                    <button class="btn-key">Baby</button>
+                </div>
+
+            </section>
+
+            <div class="gallery-container"></div>
+        </div>
+        <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <div class="editor-page">
+
+            <div class="canvas-container">
+                <canvas height="350" width="350" onclick="" class="my-canvas"></canvas>
             </div>
 
-            <div class="keywords-holder">
-                <button class="btn-key"> Happy</button>
-                <button class="btn-key">Dog</button>
-                <button class="btn-key">Cat</button>
-                <button class="btn-key">Human</button>
-                <button class="btn-key">Animal</button>
-                <button class="btn-key">Baby</button>
+            <div class="main-editor">
+                <div class="main-editor-text-funcs">
+                    <input class="main-editor-text" type="text">
+                    <div class="text-btns">
+                        <button class="text-btn switch-line-btn"></button>
+                        <button class="text-btn move-up-btn "></button>
+                        <button class="text-btn move-down-btn "></button>
+                        <button class="text-btn add-line-btn"></button>
+                        <button class="text-btn delete-line-btn"></button>
+                    </div>
+                </div>
+                <div class="main-editor-style-funcs">
+                    <div class="style-btns">
+                        <button class="style-btn font-up-btn"></button>
+                        <button class="style-btn font-down-btn"></button>
+                        <button class="style-btn align-left-btn"></button>
+                        <button class="style-btn align-right-btn"></button>
+                        <button class="style-btn align-center-btn"></button>
+                        <button class="style-btn"></button>
+                    </div>
+                </div>
+
+                <div class="main-editor-emoj">
+
+                </div>
             </div>
 
-        </section>
 
-        <div class="gallery-container"></div>
+        </div>
 
+
+
+        </div>
 
     </main>
 
-    <footer class="main-"></footer>footer
 
+    <footer class="main-footer">footer</footer>
 
 
     <script src="js/util.js"></script>
-    <script src="js/service.js"></script>
-    <script src="js/controller.js"></script>
+    <script src="js/memeService.js"></script>
+    <script src="js/memeController.js"></script>
 </body>
 
 </html>
