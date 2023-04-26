@@ -6,13 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/88bc07c294.js" crossorigin="anonymous"></script>
     <title>Docuent</title>
 </head>
 
 <body onload="onInit()" class="main-layout">
 
     <header class="main-header">
-        <div class="logo">LOGO</div>
+        <div class="logo">Meme Generator</div>
         <nav class="main-nav">
             <button onclick="onChangePage(this.innerText)" class="btn-galery">Galery</button>
             <button onclick="onChangePage(this.innerText)" class="btn-edit">Edit</button>
@@ -24,6 +25,7 @@
     <main class="main-content">
 
         <div class="gallery-page">
+            
             <section class="nav-funcs">
 
                 <div class="search-options">
@@ -38,12 +40,12 @@
                 </div>
 
                 <div class="keywords-holder">
-                    <button class="btn-key"> Happy</button>
-                    <button class="btn-key">Dog</button>
-                    <button class="btn-key">Cat</button>
-                    <button class="btn-key">Human</button>
-                    <button class="btn-key">Animal</button>
-                    <button class="btn-key">Baby</button>
+                    <button onclick="onKeyword(this,this.innerText)">Happy</button>
+                    <button onclick="onKeyword(this,this.innerText)">Dog</button>
+                    <button onclick="onKeyword(this,this.innerText)">Cat</button>
+                    <button onclick="onKeyword(this,this.innerText)">Human</button>
+                    <button onclick="onKeyword(this,this.innerText)">Animal</button>
+                    <button onclick="onKeyword(this,this.innerText)">Baby</button>
                 </div>
 
             </section>
@@ -55,7 +57,7 @@
         <div class="editor-page">
 
             <div class="canvas-container">
-                <canvas height="350" width="350" onclick="" class="my-canvas"></canvas>
+                <canvas height="550" width="480" onclick="" class="my-canvas"></canvas>
             </div>
 
             <div class="main-editor">
@@ -65,28 +67,32 @@
                 <div class="main-editor-text-funcs">
 
                     <div class="text-btns">
-                        <button class="text-btn switch-line-btn"></button>
-                        <button class="text-btn move-up-btn "></button>
-                        <button class="text-btn move-down-btn "></button>
-                        <button class="text-btn add-line-btn"></button>
-                        <button class="text-btn delete-line-btn"></button>
+                        <button onclick="onSwitchLine()" class="switch-line-btn">⬆⬇</button>
+                        <button class="move-up-btn ">⬆</button>
+                        <button class="move-down-btn ">⬇</button>
+                        <button onclick="onAddLine()" class="add-line-btn"> +</button>
+                        <!-- <button class="delete-line-btn">🚮</button> -->
+                        <button class="delete-line-btn"> &#1F5D1; </button>
                     </div>
                 </div>
 
-                <div class="main-editor-style-funcs">
+                <!-- <div class="main-editor-style-funcs"> -->
                     <div class="style-btns">
-                        <button onclick="onTextSizeChange('+')" class="style-btn font-up-btn">A+</button>
-                        <button onclick="onTextSizeChange('-')" class="style-btn font-down-btn">A-</button>
+                        <button onclick="onTextSizeChange('+')" class="font-up-btn">A+</button>
+                        <button onclick="onTextSizeChange('-')" class="font-down-btn">A-</button>
                         <input oninput="onSetColor(this.value)" type="color" name="" id="">
-                        <button class="style-btn align-right-btn"></button>
-                        <button class="style-btn align-center-btn"></button>
-                        <button class="style-btn"></button>
+                        <button class="align-right-btn"></button>
+                        <button class="align-center-btn"></button>
+                        <button class=""></button>
                     </div>
-                </div>
+                <!-- </div> -->
 
                 <div class="main-editor-emoj"></div>
 
-                <div class="media-share"></div>
+                <div class="media-share">
+                    <button class="share-btn">SHARE</button>
+                    <button class="download-btn">download</button>
+                </div>
             </div>
 
 

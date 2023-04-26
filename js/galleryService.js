@@ -5,8 +5,6 @@ let gImgs = createImgs()
 
 
 
-
-
 function createImg(id, url, keywords) {
     return {
         id,
@@ -17,9 +15,9 @@ function createImg(id, url, keywords) {
 
 function createImgs() {
     return [
-        createImg(0, 'img/1.jpg', ['funny', 'cat']),
-        createImg(1, 'img/2.jpg', ['funny', 'cat']),
-        createImg(2, 'img/3.jpg', ['funny', 'cat'])
+        createImg(1, 'img/1.jpg', ['funny', 'cat']),
+        createImg(2, 'img/2.jpg', ['funny', 'cat']),
+        createImg(3, 'img/3.jpg', ['funny', 'cat'])
     ]
 }
 

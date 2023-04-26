@@ -1,11 +1,11 @@
 'use strict'
 
 
-
 //////////////////////BASIC///////////////////////////
 function onInit() {
     gElCanvas = document.querySelector('.my-canvas')
     gCtx = gElCanvas.getContext('2d')
+    createLine()
     renderMeme()
     renderGallery()
 }
@@ -29,10 +29,11 @@ function onChangePage(txt) {
 function renderMeme(){
     const meme = getMeme()
     const elImg = new Image()
-    img.src = `./img/${meme.selectedImgId}.jpg`
-	img.onload = () => {
-		gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+    elImg.src = `img/${meme.selectedImgId}.jpg`
+	elImg.onload = () => {
+		gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 		drawText()
+        setLineFocus()
     }
 }
 
@@ -42,7 +43,6 @@ function onSetColor(color) {
 }
 
 
-
 function onTextSizeChange(val) {
     if (val === '+') textSizeGrow()
     else textSizeShrink()
@@ -50,12 +50,15 @@ function onTextSizeChange(val) {
     renderMeme()
 }
 
-
 //////////////////////EDITOR///////////////////////////
 
 function onUpdateLine(txt) {
     setLineText(txt)
     renderMeme()
+}
+
+function onSwitchLine(){
+    switchLine()
 }
 
 //////////////////////GALLERY///////////////////////////
@@ -83,5 +86,14 @@ function onSetImg(id) {
     renderMeme()
     displayEditor(elGalleryPage, elEditorPage)
 }
+
+ function onAddLine(){
+    createLine()
+    renderMeme()
+ }
+
+ function onKeyword(elBtn,val){
+    handleKeyWords(elBtn)
+ }
 
 
