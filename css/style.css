@@ -3,9 +3,10 @@
 @import 'setup/typography.css'; */
 
 /* BASICS */
-@import 'base.css';
-@import 'layout.css';
-@import 'helpers.css';
+/* @import 'base.css'; */
+/* @import 'layout.css'; */
+@import 'gallery.css';
+@import 'editor.css';
 
 /* COMPONENTS */
 @import 'header.css';

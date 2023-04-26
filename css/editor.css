@@ -1,0 +1,16 @@
+
+
+.main-editor{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.main-editor>*{
+    border: 1px solid black;
+}
+
+.style-btns>*{
+    width: 55px;
+    height: 50px;
+}

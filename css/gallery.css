@@ -1,0 +1,28 @@
+
+
+.gallery-page{
+    width: 100%;
+}
+
+.nav-funcs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.gallery-container{
+    display: grid;
+    gap: 5px;
+    margin-inline-start: 5px;
+    margin-block-start: 5px;
+}
+
+.card{
+    width:100px;
+    height: 100px;
+}
+
+.card img{
+    width: 100%;
+    height: 100%;
+}

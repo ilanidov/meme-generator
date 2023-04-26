@@ -1,5 +1,59 @@
-.main-content{
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+body {
+    height: 100vh;
+}
+
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.main-content {
     border: 1px solid black;
-    width: 70vw;
+    width: 60vw;
     height: 100%;
 }
+
+.editor-page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+
+    /* justify-content: space-between; */
+    align-items: center;
+    justify-content: space-evenly;
+    display: none;
+}
+
+.canvs-container {
+    /* flex-grow: 1; */
+    /* height: 100%; */
+    /* display: block; */
+
+}
+
+.main-editor {
+    /* flex-grow: 1; */
+    height: 350px;
+    width: 350px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+
+    /* align-items: center; */
+    /* justify-self: center; */
+}
+

@@ -9,21 +9,21 @@
     <title>Docuent</title>
 </head>
 
-<body onload="init()" class="main-layout">
+<body onload="onInit()" class="main-layout">
 
     <header class="main-header">
         <div class="logo">LOGO</div>
         <nav class="main-nav">
-            <button class="main-nav-btn btn-galery"></button>
-            <button class="main-nav-btn btn-edit"></button>
-            <button class="main-nav-btn btn-saved"></button>
-            <button class="main-nav-btn btn-about"></button>
+            <button onclick="onChangePage(this.innerText)" class="btn-galery">Galery</button>
+            <button onclick="onChangePage(this.innerText)" class="btn-edit">Edit</button>
+            <button onclick="onChangePage(this.innerText)" class="btn-saved">Saved</button>
+            <button onclick="onChangePage(this.innerText)" class="btn-about">About</button>
         </nav>
     </header>
 
     <main class="main-content">
 
-        <div class="gallery-page" hidden>
+        <div class="gallery-page">
             <section class="nav-funcs">
 
                 <div class="search-options">
@@ -59,8 +59,11 @@
             </div>
 
             <div class="main-editor">
+                
+                    <input oninput="onUpdateLine(this.value)" class="main-editor-text" type="text">
+
                 <div class="main-editor-text-funcs">
-                    <input class="main-editor-text" type="text">
+
                     <div class="text-btns">
                         <button class="text-btn switch-line-btn"></button>
                         <button class="text-btn move-up-btn "></button>
@@ -69,28 +72,26 @@
                         <button class="text-btn delete-line-btn"></button>
                     </div>
                 </div>
+
                 <div class="main-editor-style-funcs">
                     <div class="style-btns">
-                        <button class="style-btn font-up-btn"></button>
-                        <button class="style-btn font-down-btn"></button>
-                        <button class="style-btn align-left-btn"></button>
+                        <button onclick="onTextSizeChange('+')" class="style-btn font-up-btn">A+</button>
+                        <button onclick="onTextSizeChange('-')" class="style-btn font-down-btn">A-</button>
+                        <input oninput="onSetColor(this.value)" type="color" name="" id="">
                         <button class="style-btn align-right-btn"></button>
                         <button class="style-btn align-center-btn"></button>
                         <button class="style-btn"></button>
                     </div>
                 </div>
 
-                <div class="main-editor-emoj">
+                <div class="main-editor-emoj"></div>
 
-                </div>
+                <div class="media-share"></div>
             </div>
 
 
         </div>
 
-
-
-        </div>
 
     </main>
 
@@ -99,8 +100,9 @@
 
 
     <script src="js/util.js"></script>
+    <script src="js/galleryService.js"></script>
     <script src="js/memeService.js"></script>
-    <script src="js/memeController.js"></script>
+    <script src="js/Controller.js"></script>
 </body>
 
 </html>
