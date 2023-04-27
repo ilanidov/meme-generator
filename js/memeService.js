@@ -1,7 +1,5 @@
 'use strict'
-////// canvas////
-let gElCanvas
-let gCtx
+
 //////////////////////
 let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 // let gImgs = [{ id: 1, url: 'img/imgSquere/1.jpg', keywords: ['funny', 'cat'] }]
@@ -31,23 +29,16 @@ function drawText() {
 }
 
 
-function setLineFocus() {
-    const line = gMeme.lines[gMeme.selectedLineIdx]
-    if (!line) return
-    gCtx.beginPath()
-    gCtx.rect(
-        line.positionX - (gCtx.measureText(line.txt).width) / 2 - 10,
-        line.positionY - 25,
-        gCtx.measureText(line.txt).width + 20,
-        line.size + 20
-    )
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'white'
-    gCtx.stroke()
-    gCtx.closePath()
-
-
+function getCurrLine() {
+    return gMeme.lines[gMeme.selectedLineIdx]
 }
+
+function getAllLines(){
+    return gMeme.lines
+}
+
+
+
 
 
 
@@ -57,7 +48,7 @@ function getMeme() {
 }
 
 function setLineText(txt) {
-    gMeme.lines[0].txt = txt
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
 
@@ -106,7 +97,7 @@ function createLine() {
     }
 
     const newLine = {
-        txt: 'your pref',
+        txt: 'Crack your Nut!',
         size: 30,
         align: 'center',
         color: 'red',
@@ -122,4 +113,7 @@ function createLine() {
 function switchLine() {
     if (gMeme.lines.length === 0) return
     if (gMeme.selectedLineIdx === gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
+    else gMeme.selectedLineIdx++
+    setLineFocus()
 }
+
