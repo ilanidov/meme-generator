@@ -172,12 +172,16 @@ function caseLineClicked(pos) {
             pos.y > line.positionY - 25 &&
             pos.y < line.positionY + 25
     })
+
     if (lineIdx < 0) return
+
     const meme = getMeme()
     meme.selectedLineIdx = lineIdx
     setLineFocus()
     updatePlaceHolder(1)
     renderMeme()
-    // console.log(lineIdx)
 
+    // console.log(lineIdx)
 }
+
+var isLIneClicked = false
