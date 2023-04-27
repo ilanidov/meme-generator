@@ -71,8 +71,8 @@
                         <button class="move-up-btn ">⬆</button>
                         <button class="move-down-btn ">⬇</button>
                         <button onclick="onAddLine()" class="add-line-btn"> +</button>
-                        <!-- <button class="delete-line-btn">🚮</button> -->
-                        <button class="delete-line-btn"> &#1F5D1; </button>
+                        <button onclick="onDeleteLine()" class="delete-line-btn">🚮</button>
+                        <!-- <button class="delete-line-btn"> &#1F5D1; </button> -->
                     </div>
                 </div>
 
@@ -81,9 +81,16 @@
                         <button onclick="onTextSizeChange('+')" class="font-up-btn">A+</button>
                         <button onclick="onTextSizeChange('-')" class="font-down-btn">A-</button>
                         <input oninput="onSetColor(this.value)" type="color" name="" id="">
-                        <button class="align-right-btn"></button>
-                        <button class="align-center-btn"></button>
-                        <button class=""></button>
+                        <button onclick="onAlignBtn('left')" class="align-left-btn">left</button>
+                        <button onclick="onAlignBtn('center')" class="align-center-btn">center</button>
+                        <button onclick="onAlignBtn('right')" class="align-right-btn">right</button>
+
+                        <select name="font-change" class="font-change" onchange="onFontChange(this.value)">
+                            <option value="Impact">Impact</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Georgia">Georgia</option>
+                        </select>
+
                     </div>
                 <!-- </div> -->
 

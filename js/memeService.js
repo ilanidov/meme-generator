@@ -12,28 +12,13 @@ let gMeme = {
 }
 
 
-function drawText() {
-    const meme = gMeme
-    const memeLines = meme.lines
-    memeLines.map((currLine) => {
-        gCtx.font = `${currLine.size}px ${currLine.font}`
-        gCtx.lineWidth = 2
-        gCtx.strokeStyle = currLine.stroke
-        gCtx.fillStyle = currLine.color
-        gCtx.textAlign = currLine.align
-        gCtx.textBaseline = 'middle'
-
-        gCtx.fillText(currLine.txt, currLine.positionX, currLine.positionY)
-        gCtx.strokeText(currLine.txt, currLine.positionX, currLine.positionY)
-    })
-}
 
 
 function getCurrLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
 }
 
-function getAllLines(){
+function getAllLines() {
     return gMeme.lines
 }
 
@@ -48,7 +33,8 @@ function getMeme() {
 }
 
 function setLineText(txt) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt
+    const line = getSelectedLine()
+    line.txt = txt
 }
 
 
@@ -63,16 +49,19 @@ function displayEditor(elGalleryPage, elEditorPage) {
 
 
 function setColor(color) {
-    gMeme.lines[gMeme.selectedLineIdx].color = color
+    const line = getSelectedLine()
+    line.color = color
 }
 
 
 function textSizeGrow() {
-    gMeme.lines[gMeme.selectedLineIdx].size += 5
+    const line = getSelectedLine()
+    line.size += 5
 }
 
 function textSizeShrink() {
-    gMeme.lines[gMeme.selectedLineIdx].size -= 5
+    const line = getSelectedLine()
+    line.size -= 5
 
 }
 
@@ -81,30 +70,30 @@ function createLine() {
     let posX
     let posY
 
-    if (gMeme.lines.length === 0) {
+    if (!gMeme.lines.length) {
         posX = gElCanvas.width / 2
         posY = gElCanvas.height / 2
     } else if (gMeme.lines.length === 1) {
         posX = gElCanvas.width / 2
         posY = gElCanvas.height / 4
         gMeme.selectedLineIdx++
-
     } else if (gMeme.lines.length === 2) {
         posX = gElCanvas.width / 2
         posY = gElCanvas.height / 2 + (gElCanvas.height / 4)
         gMeme.selectedLineIdx++
-
     }
 
     const newLine = {
         txt: 'Crack your Nut!',
         size: 30,
         align: 'center',
-        color: 'red',
-        font: 'arial',
+        color: 'white',
+        font: 'Impact',
         stroke: 'black',
         positionX: posX,
-        positionY: posY
+        positionY: posY,
+        isClicked: true,
+        textWidth: 0
     }
 
     gMeme.lines.push(newLine)
@@ -117,3 +106,27 @@ function switchLine() {
     setLineFocus()
 }
 
+
+
+function adjustLineAligntment(direction, canvasWidth) {
+    const line = getSelectedLine()
+    console.log(line.textWidth)
+    // let { positionX, txtWidth } = line
+    if (direction === 'left') line.positionX = line.textWidth / 2 + 12
+    else if (direction === 'right') line.positionX = canvasWidth - (line.textWidth) / 2 - 12
+    else line.positionX = canvasWidth / 2
+}
+
+
+function getSelectedLine() {
+    return gMeme.lines[gMeme.selectedLineIdx]
+}
+
+function fontChange(val) {
+    const line = getSelectedLine()
+    line.font = val
+}
+
+function deleteLine(){
+    gMeme.lines.splice(gMeme.selectedLineIdx,1)
+}

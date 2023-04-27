@@ -40,6 +40,24 @@ function renderMeme() {
     }
 }
 
+
+function drawText() {
+    console.log('sadas')
+    const meme = gMeme
+    const memeLines = meme.lines
+    memeLines.map((currLine) => {
+        gCtx.lineWidth = 2
+        gCtx.strokeStyle = currLine.stroke
+        gCtx.fillStyle = currLine.color
+        gCtx.font = `${currLine.size}px ${currLine.font}`
+        gCtx.textAlign = currLine.align
+        gCtx.textBaseline = 'middle'
+
+        gCtx.fillText(currLine.txt, currLine.positionX, currLine.positionY)
+        gCtx.strokeText(currLine.txt, currLine.positionX, currLine.positionY)
+    })
+}
+
 function onSetColor(color) {
     setColor(color)
     renderMeme()
@@ -55,12 +73,15 @@ function onTextSizeChange(val) {
 
 function setLineFocus() {
     const line = getCurrLine()
-    if (!line) return
+    if (!line || !line.isClicked) return
+
+    line.textWidth = gCtx.measureText(line.txt).width
+
     gCtx.beginPath()
     gCtx.rect(
-        line.positionX - (gCtx.measureText(line.txt).width) / 2 - 10,
+        line.positionX - (line.textWidth) / 2 - 10,
         line.positionY - 25,
-        gCtx.measureText(line.txt).width + 20,
+        line.textWidth + 20,
         line.size + 20
     )
     gCtx.lineWidth = 2
@@ -68,6 +89,11 @@ function setLineFocus() {
     gCtx.stroke()
     gCtx.closePath()
 }
+
+// function setLineTextWidth() {
+//     const line = getCurrLine()
+//     line.textWidth = gCtx.measureText(line.txt).width
+// }
 
 //////////////////////EDITOR///////////////////////////
 
@@ -165,6 +191,8 @@ function getEvPos(ev) {
 
 function caseLineClicked(pos) {
     const lines = getAllLines()
+    const meme = getMeme()
+
     if (!lines.length) return
     const lineIdx = lines.findIndex(line => {
         return pos.x > line.positionX - (gCtx.measureText(line.txt).width) / 2 - 10 &&
@@ -173,15 +201,35 @@ function caseLineClicked(pos) {
             pos.y < line.positionY + 25
     })
 
-    if (lineIdx < 0) return
+    if (lineIdx < 0) {
+        meme.lines[meme.selectedLineIdx].isClicked = false
+        updatePlaceHolder()
+        renderMeme()
+    } else {
+        meme.lines[meme.selectedLineIdx].isClicked = true
+        meme.selectedLineIdx = lineIdx
+        setLineFocus()
+        updatePlaceHolder(1)
+        renderMeme()
+    }
 
-    const meme = getMeme()
-    meme.selectedLineIdx = lineIdx
-    setLineFocus()
-    updatePlaceHolder(1)
-    renderMeme()
-
-    // console.log(lineIdx)
 }
 
-var isLIneClicked = false
+function onAlignBtn(direction) {
+    // setLineTextWidth()
+    adjustLineAligntment(direction, gElCanvas.width)
+    drawText()
+    renderMeme()
+}
+
+function onFontChange(val){
+    fontChange(val)
+    renderMeme()
+}
+
+
+function onDeleteLine(){
+    deleteLine()
+    renderMeme()
+}
+
