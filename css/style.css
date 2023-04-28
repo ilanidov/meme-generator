@@ -1,12 +1,14 @@
 /* BASICS */
 
+@import 'main.css';
+@import 'header.css';
+
 @import 'gallery.css';
 @import 'editor.css';
 
 /* COMPONENTS */
-@import 'header.css';
 @import 'footer.css';
-@import 'main.css';
+@import 'saved-meme.css';
 
 
 /* FONTS */

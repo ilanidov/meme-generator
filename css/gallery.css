@@ -47,6 +47,10 @@
 
 .gallery-container {
     display: grid;
+    grid-template-columns: 16% 16% 16% 16% 16% 16%;
+    /* grid-auto-flow: column; */
+    /* grid-template-columns: auto ; */
+
     gap: 5px;
     margin-inline-start: 5px;
     margin-block-start: 5px;

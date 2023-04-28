@@ -80,6 +80,13 @@ canvas {
     background-color: #ffffff;
 }
 
+.save-btn{
+    width: 420px;
+    height: 50px;
+    border-radius: 45px;
+
+}
+
 .media-share {
     display: flex;
     justify-content: space-around;

@@ -2,7 +2,9 @@
 ////// canvas////
 let gElCanvas
 let gCtx
-
+let gStartPos
+let gCurrPage = 'Galery'
+let gStoredMemes = []
 //////////////////////BASIC///////////////////////////
 function onInit() {
     gElCanvas = document.querySelector('.my-canvas')
@@ -11,17 +13,24 @@ function onInit() {
     createLine()
     renderMeme()
     renderGallery()
+    gStoredMemes = loadStoredMemes()
+    console.log(gStoredMemes)
 }
 
 function onChangePage(txt) {
     const elGalleryPage = document.querySelector('.gallery-page')
     const elEditorPage = document.querySelector('.editor-page')
+    const elSavedPage = document.querySelector('.saved-page')
     switch (txt) {
         case 'Galery':
             displayGalery(elGalleryPage, elEditorPage)
             break
         case 'Edit':
             displayEditor(elGalleryPage, elEditorPage)
+            break
+        case 'Saved':
+            displaySaved(elSavedPage)
+            renderStoredMemes(loadStoredMemes())
             break
     }
 }
@@ -32,7 +41,7 @@ function onChangePage(txt) {
 function renderMeme() {
     const meme = getMeme()
     const elImg = new Image()
-    elImg.src = `img/${meme.selectedImgId}.jpg`
+    elImg.src = `img/${(meme.selectedImgId)+1}.jpg`
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
@@ -40,9 +49,22 @@ function renderMeme() {
     }
 }
 
+function renderStoredMemes(storedMemes) {
+    let strHtml = ''
+    storedMemes.map(meme => {
+        strHtml += `
+        <div class="stored-meme" data-id="${meme.id}">
+        <img src="${meme.memeUrl}">
+        <button class="delete-meme" onclick="onDeleteStoredMeme('${meme.id}')" > Delete </button>
+        <button class="download-meme" onclick="onDownloadStoredMeme('${meme.id}')" > Download </button>
+        <button class="edit-meme" onclick="onEditStoredMeme('${meme.id}')" > Edit </button>
+        </div>
+    `
+        document.querySelector('.saved-meme-container').innerHTML = strHtml
+    })
+}
 
 function drawText() {
-    console.log('sadas')
     const meme = gMeme
     const memeLines = meme.lines
     memeLines.map((currLine) => {
@@ -62,7 +84,6 @@ function onSetColor(color) {
     setColor(color)
     renderMeme()
 }
-
 
 function onTextSizeChange(val) {
     if (val === '+') textSizeGrow()
@@ -89,11 +110,6 @@ function setLineFocus() {
     gCtx.stroke()
     gCtx.closePath()
 }
-
-// function setLineTextWidth() {
-//     const line = getCurrLine()
-//     line.textWidth = gCtx.measureText(line.txt).width
-// }
 
 //////////////////////EDITOR///////////////////////////
 
@@ -159,28 +175,50 @@ function addAllListeners() {
 
 function addMouseListeners() {
     gElCanvas.addEventListener('mousedown', onDown)
-    // gElCanvas.addEventListener('mousemove', onMove)
-    // gElCanvas.addEventListener('mouseup', onUp)
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mouseup', onUp)
 }
 
 function addTouchListeners() {
-    // gElCanvas.addEventListener('touchstart', onDown)
-    // gElCanvas.addEventListener('touchmove', onMove)
-    // gElCanvas.addEventListener('touchend', onUp)
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchend', onUp)
 }
 
 function onDown(ev) {
     const currClickPos = getEvPos(ev)
-    caseLineClicked(currClickPos)
-    // console.log(currClickPos)
+    checkLineIsClicked(currClickPos)
 
-    // if (gCanvasPrefs.shape !== 'Line') return
-    // gCtx.strokeStyle = gCanvasPrefs.txtColor
-    // isDrawing = true
-    // gCtx.beginPath()
-    // gCtx.moveTo(ev.clientX - gElCanvas.offsetLeft, ev.clientY - gElCanvas.offsetTop)
-    // document.body.style.cursor = 'grabbing'
+    if (!checkLineIsClicked(currClickPos)) return
+    setLineDrag(true)
+    gStartPos = currClickPos
+    document.body.style.cursor = 'grabbing'
 }
+
+function onMove(ev) {
+    const { isDragged } = getCurrLine()
+    if (!isDragged) return
+    console.log('asd')
+    const pos = getEvPos(ev)
+    const dx = pos.x - gStartPos.x
+    const dy = pos.y - gStartPos.y
+    moveLine(dx, dy)
+    gStartPos = pos
+    renderMeme()
+}
+
+function onUp() {
+    setLineDrag(false)
+    document.body.style.cursor = 'grab'
+}
+
+
+
+
+
+
+
+
 
 function getEvPos(ev) {
     return {
@@ -189,11 +227,11 @@ function getEvPos(ev) {
     }
 }
 
-function caseLineClicked(pos) {
+function checkLineIsClicked(pos) {
     const lines = getAllLines()
     const meme = getMeme()
-
     if (!lines.length) return
+
     const lineIdx = lines.findIndex(line => {
         return pos.x > line.positionX - (gCtx.measureText(line.txt).width) / 2 - 10 &&
             pos.x < line.positionX + (gCtx.measureText(line.txt).width) / 2 + 10 &&
@@ -205,31 +243,111 @@ function caseLineClicked(pos) {
         meme.lines[meme.selectedLineIdx].isClicked = false
         updatePlaceHolder()
         renderMeme()
+        return false
     } else {
         meme.lines[meme.selectedLineIdx].isClicked = true
         meme.selectedLineIdx = lineIdx
         setLineFocus()
         updatePlaceHolder(1)
         renderMeme()
+        return true
     }
-
 }
 
 function onAlignBtn(direction) {
-    // setLineTextWidth()
     adjustLineAligntment(direction, gElCanvas.width)
     drawText()
     renderMeme()
 }
 
-function onFontChange(val){
+function onFontChange(val) {
     fontChange(val)
     renderMeme()
 }
 
-
-function onDeleteLine(){
+function onDeleteLine() {
     deleteLine()
     renderMeme()
 }
 
+function onMoveBtn(direction) {
+    moveBtn(direction)
+    renderMeme()
+}
+
+
+function onCloseModal(modalName) {
+    const elmodal = document.querySelector(`${modalName}`)
+    closeModal(elmodal)
+
+}
+
+
+function onEditStoredMeme(id) {
+    const elGalleryPage = document.querySelector('.gallery-page')
+    const elEditorPage = document.querySelector('.editor-page')
+    const elSavedPage = document.querySelector('.saved-page')
+
+    const memeToLoad = gStoredMemes.find(meme => meme.id === id)
+    gMeme = memeToLoad.memeToSave
+    renderMeme()
+    closeModal(elSavedPage)
+    displayEditor(elGalleryPage, elEditorPage)
+}
+
+
+
+///////////////////////////storage funcs////////////////////////////////
+
+
+function onSaveMeme() {
+    const memeUrl = gElCanvas.toDataURL()
+    const id = makeId()
+    // const currMeme = getMeme()
+    const memeToSave = Object.assign({}, getMeme())
+
+    gStoredMemes.push({ id, memeUrl, memeToSave })
+    saveMemeToStorage(gStoredMemes)
+}
+
+
+
+function onLoadMeme() {
+    let savedMeme = loadFromStorage(STORAGE_KEY)
+    renderSavedMeme(savedMeme)
+}
+
+///////////////////////////social funcs////////////////////////////////
+
+function downloadImg(elLink) {
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}
+
+function onUploadImg() {
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg')
+    function onSuccess(uploadedImgUrl) {
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        console.log(encodedUploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+    }
+    doUploadImg(imgDataUrl, onSuccess)
+}
+
+function doUploadImg(imgDataUrl, onSuccess) {
+    const formData = new FormData()
+    formData.append('img', imgDataUrl)
+
+    const XHR = new XMLHttpRequest()
+    XHR.onreadystatechange = () => {
+        if (XHR.readyState !== XMLHttpRequest.DONE) return
+        if (XHR.status !== 200) return console.error('Error uploading image')
+        const { responseText: url } = XHR
+        onSuccess(url)
+    }
+    XHR.onerror = (req, ev) => {
+        console.error('Error connecting to server with request:', req, '\nGot response data:', ev)
+    }
+    XHR.open('POST', '//ca-upload.com/here/upload.php')
+    XHR.send(formData)
+}

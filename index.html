@@ -23,9 +23,22 @@
     </header>
 
     <main class="main-content">
+        <!-- ////////////////////////////SAVED PAGE////////////////////////////////////////////////// -->
+
+
+        <div class="saved-page">
+            <header class="main-saved-herader">
+                <h2 class="saved-header">Pick up what you dropped!!!</h2>
+                <button onclick="onCloseModal('.saved-page')" class="close-modal-btn">Close</button>
+            </header>
+            <div class="saved-meme-container"></div>
+        </div>
+
+
+        <!-- ////////////////////////////GALLERY PAGE////////////////////////////////////////////////// -->
 
         <div class="gallery-page">
-            
+
             <section class="nav-funcs">
 
                 <div class="search-options">
@@ -52,7 +65,7 @@
 
             <div class="gallery-container"></div>
         </div>
-        <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- ////////////////////////////EDITOR PAGE////////////////////////////////////////////////// -->
 
         <div class="editor-page">
 
@@ -61,15 +74,16 @@
             </div>
 
             <div class="main-editor">
-                
-                    <input oninput="onUpdateLine(this.value)" class="main-editor-text" type="text" placeholder="Crack your Nut!">
+
+                <input oninput="onUpdateLine(this.value)" class="main-editor-text" type="text"
+                    placeholder="Crack your Nut!">
 
                 <div class="main-editor-text-funcs">
 
                     <div class="text-btns">
                         <button onclick="onSwitchLine()" class="switch-line-btn">⬆⬇</button>
-                        <button class="move-up-btn ">⬆</button>
-                        <button class="move-down-btn ">⬇</button>
+                        <button onclick="onMoveBtn('up')" class="move-up-btn ">⬆</button>
+                        <button onclick="onMoveBtn('down')" class="move-down-btn ">⬇</button>
                         <button onclick="onAddLine()" class="add-line-btn"> +</button>
                         <button onclick="onDeleteLine()" class="delete-line-btn">🚮</button>
                         <!-- <button class="delete-line-btn"> &#1F5D1; </button> -->
@@ -77,33 +91,38 @@
                 </div>
 
                 <!-- <div class="main-editor-style-funcs"> -->
-                    <div class="style-btns">
-                        <button onclick="onTextSizeChange('+')" class="font-up-btn">A+</button>
-                        <button onclick="onTextSizeChange('-')" class="font-down-btn">A-</button>
-                        <input oninput="onSetColor(this.value)" type="color" name="" id="">
-                        <button onclick="onAlignBtn('left')" class="align-left-btn">left</button>
-                        <button onclick="onAlignBtn('center')" class="align-center-btn">center</button>
-                        <button onclick="onAlignBtn('right')" class="align-right-btn">right</button>
+                <div class="style-btns">
+                    <button onclick="onTextSizeChange('+')" class="font-up-btn">A+</button>
+                    <button onclick="onTextSizeChange('-')" class="font-down-btn">A-</button>
+                    <input oninput="onSetColor(this.value)" type="color" name="" id="">
+                    <button onclick="onAlignBtn('left')" class="align-left-btn">left</button>
+                    <button onclick="onAlignBtn('center')" class="align-center-btn">center</button>
+                    <button onclick="onAlignBtn('right')" class="align-right-btn">right</button>
 
-                        <select name="font-change" class="font-change" onchange="onFontChange(this.value)">
-                            <option value="Impact">Impact</option>
-                            <option value="Arial">Arial</option>
-                            <option value="Georgia">Georgia</option>
-                        </select>
+                    <select name="font-change" class="font-change" onchange="onFontChange(this.value)">
+                        <option value="Impact">Impact</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Georgia">Georgia</option>
+                    </select>
 
-                    </div>
+                </div>
                 <!-- </div> -->
 
                 <div class="main-editor-emoj"></div>
+                <button onclick="onSaveMeme()" class="save-btn">save</button>
+                <!-- <button onclick="onLoadMeme()" class="save-btn">load</button> -->
 
                 <div class="media-share">
-                    <button class="share-btn">SHARE</button>
-                    <button class="download-btn">download</button>
+                    <button onclick="onUploadImg()" class="share-btn">SHARE</button>
+                    <button class="download-btn">
+                        <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download</a>
+                    </button>
                 </div>
             </div>
 
 
         </div>
+
 
 
     </main>
@@ -112,7 +131,7 @@
     <footer class="main-footer">footer</footer>
 
 
-    <script src="js/util.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/galleryService.js"></script>
     <script src="js/memeService.js"></script>
     <script src="js/Controller.js"></script>
