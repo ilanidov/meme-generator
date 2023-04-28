@@ -13,12 +13,12 @@
 }
 
 .nav-funcs>* {
-    flex-grow: 1;
+    /* flex-grow: 1; */
     display: flex;
 }
 
 .search-keys {
-    width: 550px;
+    width: 350px;
     height: 70%;
     border-radius: 25px;
     align-self: center;
@@ -41,6 +41,36 @@
     font-weight: 300;
 }
 
+.random-meme-btn {
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+    width: 150px;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.upload-img-btn{
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+    position: relative;
+    width: 150px;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-input{
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
 
 
 /* ///////////////////////////////////////// */
@@ -48,8 +78,6 @@
 .gallery-container {
     display: grid;
     grid-template-columns: 16% 16% 16% 16% 16% 16%;
-    /* grid-auto-flow: column; */
-    /* grid-template-columns: auto ; */
 
     gap: 5px;
     margin-inline-start: 5px;

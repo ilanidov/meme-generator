@@ -48,29 +48,110 @@ canvas {
 .style-btns>* {
     width: 55px;
     height: 50px;
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
 }
 
 .text-btns {
     display: flex;
     justify-content: space-around;
+
 }
 
 .text-btns>* {
     margin: 5px;
-
     height: 60px;
     width: 55px;
+    border-radius: 15px;
+
 }
 
-.font-up-btn {
-    background-image: url('../btnImg/a+.png');
-}
 
 .style-btns {
     width: 445px;
     height: 151px;
     border-radius: 15px;
     background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+}
+
+.switch-line-btn {
+    background-image: url('/btnImg/replace-icon.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #2cb5db;
+}
+.move-up-btn {
+    background-image: url('/btnImg/up-arrow-icon.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #33be6d;
+}
+.move-down-btn {
+    background-image: url('/btnImg/down-arrow-icon.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #33be6d;
+}
+.delete-line-btn {
+    background-image: url('/btnImg/delete-icon.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #e06464;
+}
+.add-line-btn {
+    background-image: url('/btnImg/plus-icon.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #33be6d;
+}
+.align-center-btn {
+    background-image: url('/btnImg/icon-center.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.align-right-btn {
+    background-image: url('/btnImg/icon-right.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.align-left-btn {
+    background-image: url('/btnImg/icon-left.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.color-change-btn {
+    background-image: url('/btnImg/icon-color.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.color-change-btn>* {
+    opacity: 0;
+}
+
+.font-up-btn {
+    background-image: url('/btnImg/font-size-increase-icon.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.font-down-btn {
+    background-image: url('/btnImg/font-size-decrease-icon.png');
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .main-editor-emoj {
@@ -80,7 +161,7 @@ canvas {
     background-color: #ffffff;
 }
 
-.save-btn{
+.save-btn {
     width: 420px;
     height: 50px;
     border-radius: 45px;
@@ -97,5 +178,34 @@ canvas {
     width: 210px;
     height: 50px;
     border-radius: 15px;
-    box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff;
+    /* box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff; */
 }
+
+.share-btn {
+    /* box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff; */
+    background-color: #1e7cd3;
+}
+
+
+.download-btn{
+    background-color: #b076d9;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.download-tag{
+    text-decoration:none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.save-btn{
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+}
+
+save

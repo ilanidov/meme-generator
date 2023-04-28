@@ -165,13 +165,58 @@ function loadStoredMemes() {
 
 
 
+function createRandomMeme(gElCanvas) {
+    const randomMeme = {
+        selectedImgId: getRandomInt(0, 17),
+        selectedLineIdx: 0,
+        lines: [
+            {
+                txt:  shortFunnySentences[getRandomInt(0,14)],
+                size: getRandomInt(25,45),
+                align: 'center',
+                color: getRandomColor(),
+                font: 'Impact',
+                stroke: getRandomColor(),
+                positionX: gElCanvas.width / 2,
+                positionY: gElCanvas.height / 4,
+                isClicked: true,
+                textWidth: 0,
+                isDragged: false
+            }
+        ]
+    }
+    return randomMeme
+}
 
 
+const shortFunnySentences = [
+    "I can count potato",
+    "Brain cells come and go",
+    "Dyslexics teople poo",
+    "My life is a mess",
+    "I forgot how to",
+    "Slept on keyboard",
+    "I talk to myself",
+    "Wars come and go",
+    "Why so cereal?",
+    "Do skunks celebrate?",
+    "Sleep is overrated",
+    "I'm not arguing",
+    "I love deadlines",
+    "Burrito: food envelope",
+    "I need a nap"
+  ]
+  
 
-
-
+  
 
 
 function saveMemeToStorage(savedMemes) {
     saveToStorage(STORAGE_KEY, savedMemes)
 }
+
+
+
+
+
+

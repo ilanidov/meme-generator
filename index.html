@@ -42,24 +42,33 @@
             <section class="nav-funcs">
 
                 <div class="search-options">
-                    <input list="keys" type="list" class="search-keys" name="search-keys" placeholder="Search">
+                    <input list="keys" class="search-keys" name="search-keys" placeholder="Search" onchange="onSetFilterBy(this.value)">
                     <datalist id="keys" class="search-key">
-                        <option value="All">All</option>
+                        <option value="All"></option>
                         <option value="Happy">Happy</option>
-                        <option value="Dog">Dog</option>
-                        <option value="Cat">Cat</option>
+                        <option value="Angry">Angry</option>
+                        <option value="Famous">Famous</option>
                         <option value="Human">Human</option>
+                        <option value="Animal">Animal</option>
+                        <option value="Actor">Actor</option>
                     </datalist>
                 </div>
 
                 <div class="keywords-holder">
                     <button onclick="onKeyword(this,this.innerText)">Happy</button>
-                    <button onclick="onKeyword(this,this.innerText)">Dog</button>
-                    <button onclick="onKeyword(this,this.innerText)">Cat</button>
+                    <button onclick="onKeyword(this,this.innerText)">Angry</button>
+                    <button onclick="onKeyword(this,this.innerText)">Famous</button>
                     <button onclick="onKeyword(this,this.innerText)">Human</button>
                     <button onclick="onKeyword(this,this.innerText)">Animal</button>
-                    <button onclick="onKeyword(this,this.innerText)">Baby</button>
+                    <button onclick="onKeyword(this,this.innerText)">Actor</button>
                 </div>
+
+                <button onclick="onFlexMeme()" class="random-meme-btn">Im Flex!</button>
+
+                <button class="upload-img-btn">Upload Own Photo
+                    <input type="file" class="file-input" name="image" onchange="onImgInput(event)" />
+                </button>
+
 
             </section>
 
@@ -81,23 +90,25 @@
                 <div class="main-editor-text-funcs">
 
                     <div class="text-btns">
-                        <button onclick="onSwitchLine()" class="switch-line-btn">⬆⬇</button>
-                        <button onclick="onMoveBtn('up')" class="move-up-btn ">⬆</button>
-                        <button onclick="onMoveBtn('down')" class="move-down-btn ">⬇</button>
+                        <button onclick="onSwitchLine()" class="switch-line-btn"></button>
+                        <button onclick="onMoveBtn('up')" class="move-up-btn"></button>
+                        <button onclick="onMoveBtn('down')" class="move-down-btn "></button>
                         <button onclick="onAddLine()" class="add-line-btn"> +</button>
-                        <button onclick="onDeleteLine()" class="delete-line-btn">🚮</button>
+                        <button onclick="onDeleteLine()" class="delete-line-btn"></button>
                         <!-- <button class="delete-line-btn"> &#1F5D1; </button> -->
                     </div>
                 </div>
 
                 <!-- <div class="main-editor-style-funcs"> -->
                 <div class="style-btns">
-                    <button onclick="onTextSizeChange('+')" class="font-up-btn">A+</button>
-                    <button onclick="onTextSizeChange('-')" class="font-down-btn">A-</button>
-                    <input oninput="onSetColor(this.value)" type="color" name="" id="">
-                    <button onclick="onAlignBtn('left')" class="align-left-btn">left</button>
-                    <button onclick="onAlignBtn('center')" class="align-center-btn">center</button>
-                    <button onclick="onAlignBtn('right')" class="align-right-btn">right</button>
+                    <button onclick="onTextSizeChange('+')" class="font-up-btn"></button>
+                    <button onclick="onTextSizeChange('-')" class="font-down-btn"></button>
+                    <button class="color-change-btn">
+                        <input oninput="onSetColor(this.value)" class="color-txt-input" type="color" name="" id="">
+                    </button>
+                    <button onclick="onAlignBtn('left')" class="align-left-btn"></button>
+                    <button onclick="onAlignBtn('center')" class="align-center-btn"></button>
+                    <button onclick="onAlignBtn('right')" class="align-right-btn"></button>
 
                     <select name="font-change" class="font-change" onchange="onFontChange(this.value)">
                         <option value="Impact">Impact</option>
@@ -105,17 +116,18 @@
                         <option value="Georgia">Georgia</option>
                     </select>
 
+
                 </div>
                 <!-- </div> -->
 
                 <div class="main-editor-emoj"></div>
-                <button onclick="onSaveMeme()" class="save-btn">save</button>
+                <button onclick="onSaveMeme()" class="save-btn">Save your Meme!</button>
                 <!-- <button onclick="onLoadMeme()" class="save-btn">load</button> -->
 
                 <div class="media-share">
-                    <button onclick="onUploadImg()" class="share-btn">SHARE</button>
-                    <button class="download-btn">
-                        <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download</a>
+                    <button onclick="onUploadImg()" class="share-btn">Share</button>
+                    <button class="download-btn">Download
+                        <a href="#" class="download-tag" onclick="downloadImg(this)" download="my-img.jpg"></a>
                     </button>
                 </div>
             </div>

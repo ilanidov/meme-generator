@@ -3,8 +3,8 @@
 let gElCanvas
 let gCtx
 let gStartPos
-let gCurrPage = 'Galery'
 let gStoredMemes = []
+let gFilterBy = 'All'
 //////////////////////BASIC///////////////////////////
 function onInit() {
     gElCanvas = document.querySelector('.my-canvas')
@@ -41,13 +41,32 @@ function onChangePage(txt) {
 function renderMeme() {
     const meme = getMeme()
     const elImg = new Image()
-    elImg.src = `img/${(meme.selectedImgId)+1}.jpg`
+
+    const currImg = gImgs.find(img => img.id === meme.selectedImgId)
+    console.log(currImg)
+    if (!currImg) return
+
+    const isUploadedImg = currImg.keywords.includes('upload')
+    if (isUploadedImg) elImg.src = `${currImg.url}`
+    else elImg.src = `img/${(meme.selectedImgId) + 1}.jpg`
+
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
         setLineFocus()
     }
 }
+
+// function renderMeme() {
+//     const meme = getMeme()
+//     const elImg = new Image()
+//     elImg.src = `img/${(meme.selectedImgId) + 1}.jpg`
+//     elImg.onload = () => {
+//         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+//         drawText()
+//         setLineFocus()
+//     }
+// }
 
 function renderStoredMemes(storedMemes) {
     let strHtml = ''
@@ -110,6 +129,12 @@ function setLineFocus() {
     gCtx.stroke()
     gCtx.closePath()
 }
+
+
+
+
+
+
 
 //////////////////////EDITOR///////////////////////////
 
@@ -213,6 +238,11 @@ function onUp() {
 }
 
 
+function onSetFilterBy(filterVal) {
+    setGalleryFilter(filterVal)
+    renderGallery()
+}
+
 
 
 
@@ -275,6 +305,15 @@ function onMoveBtn(direction) {
     renderMeme()
 }
 
+function onFlexMeme() {
+    const elGalleryPage = document.querySelector('.gallery-page')
+    const elEditorPage = document.querySelector('.editor-page')
+    gMeme = createRandomMeme(gElCanvas)
+    displayEditor(elGalleryPage, elEditorPage)
+
+    renderMeme()
+}
+
 
 function onCloseModal(modalName) {
     const elmodal = document.querySelector(`${modalName}`)
@@ -309,7 +348,6 @@ function onSaveMeme() {
     gStoredMemes.push({ id, memeUrl, memeToSave })
     saveMemeToStorage(gStoredMemes)
 }
-
 
 
 function onLoadMeme() {
@@ -351,3 +389,30 @@ function doUploadImg(imgDataUrl, onSuccess) {
     XHR.open('POST', '//ca-upload.com/here/upload.php')
     XHR.send(formData)
 }
+
+
+
+
+function onImgInput(ev) {
+    const elGalleryPage = document.querySelector('.gallery-page')
+    const elEditorPage = document.querySelector('.editor-page')
+    var reader = new FileReader()
+    reader.onload = (event) => {
+        var img = new Image()
+        img.src = event.target.result
+
+        addUploadedImg(img.src)
+        renderMeme()
+
+        displayEditor(elGalleryPage, elEditorPage)
+    }
+
+    reader.readAsDataURL(ev.target.files[0])
+}
+
+
+
+
+
+
+
