@@ -75,63 +75,63 @@ canvas {
 }
 
 .switch-line-btn {
-    background-image: url('/btnImg/replace-icon.png');
+    background-image: url('../btnImg/replace-icon.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
     background-color: #2cb5db;
 }
 .move-up-btn {
-    background-image: url('/btnImg/up-arrow-icon.png');
+    background-image: url('../btnImg/up-arrow-icon.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
     background-color: #33be6d;
 }
 .move-down-btn {
-    background-image: url('/btnImg/down-arrow-icon.png');
+    background-image: url('../btnImg/down-arrow-icon.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
     background-color: #33be6d;
 }
 .delete-line-btn {
-    background-image: url('/btnImg/delete-icon.png');
+    background-image: url('../btnImg/delete-icon.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
     background-color: #e06464;
 }
 .add-line-btn {
-    background-image: url('/btnImg/plus-icon.png');
+    background-image: url('../btnImg/plus-icon.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
     background-color: #33be6d;
 }
 .align-center-btn {
-    background-image: url('/btnImg/icon-center.png');
+    background-image: url('../btnImg/icon-center.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .align-right-btn {
-    background-image: url('/btnImg/icon-right.png');
+    background-image: url('../btnImg/icon-right.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .align-left-btn {
-    background-image: url('/btnImg/icon-left.png');
+    background-image: url('../btnImg/icon-left.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .color-change-btn {
-    background-image: url('/btnImg/icon-color.png');
+    background-image: url('../btnImg/icon-color.png');
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -141,14 +141,14 @@ canvas {
 }
 
 .font-up-btn {
-    background-image: url('/btnImg/font-size-increase-icon.png');
+    background-image: url('../btnImg/font-size-increase-icon.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .font-down-btn {
-    background-image: url('/btnImg/font-size-decrease-icon.png');
+    background-image: url('../btnImg/font-size-decrease-icon.png');
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
