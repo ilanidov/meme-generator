@@ -1,13 +1,13 @@
 .saved-page {
-    height: 500px;
-    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    width: 80vw;
     background-color: lightgray;
     translate: 0 -200%;
     transition: 0.5s;
     position: absolute;
-    /* text-align: center; */
     padding-top: 10px;
-    /* opacity: 0.7; */
     z-index: 1;
 }
 

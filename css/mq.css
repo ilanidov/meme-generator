@@ -78,6 +78,7 @@
         cursor: pointer;
         border-radius: 25px;
         margin: 5px;
+        align-self: center;
     }
 
     .main-nav-container>* {
@@ -88,6 +89,11 @@
         cursor: pointer;
         border-radius: 25px;
         margin: 5px;
+    }
+
+    .logo {
+        align-self: center;
+        font-size: x-large;
     }
 
     /* ///////////////// GALLERY //////////// */
@@ -232,9 +238,24 @@
         grid-row: 1;
     }
 
+    .logo {
+        align-self: center;
+        font-size: x-large;
+    }
+
     .btn-menu {
         display: none;
     }
+
+    .main-nav-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .main-nav-container button:hover {
+        background-color: #39a081;
+    }
+
 
     .main-nav-container>* {
         width: 80px;

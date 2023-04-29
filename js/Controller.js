@@ -1,11 +1,19 @@
 'use strict'
+
 ////// canvas////
+
 let gElCanvas
 let gCtx
 let gStartPos
 let gStoredMemes = []
 let gFilterBy = 'All'
-//////////////////////BASIC///////////////////////////
+
+
+
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+
+//////////////////////BASIC/////////////.//////////////
+
 function onInit() {
     gElCanvas = document.querySelector('.my-canvas')
     gCtx = gElCanvas.getContext('2d')
@@ -14,7 +22,6 @@ function onInit() {
     renderMeme()
     renderGallery()
     gStoredMemes = loadStoredMemes()
-    console.log(gStoredMemes)
 }
 
 function onChangePage(txt) {
@@ -34,164 +41,6 @@ function onChangePage(txt) {
             break
     }
 }
-
-
-//////////////////////CANVAS///////////////////////////
-
-function renderMeme() {
-    const meme = getMeme()
-    const elImg = new Image()
-
-    const currImg = gImgs.find(img => img.id === meme.selectedImgId)
-    console.log(currImg)
-    if (!currImg) return
-
-    const isUploadedImg = currImg.keywords.includes('upload')
-    if (isUploadedImg) elImg.src = `${currImg.url}`
-    else elImg.src = `img/${(meme.selectedImgId) + 1}.jpg`
-
-    elImg.onload = () => {
-        gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        drawText()
-        setLineFocus()
-    }
-}
-
-// function renderMeme() {
-//     const meme = getMeme()
-//     const elImg = new Image()
-//     elImg.src = `img/${(meme.selectedImgId) + 1}.jpg`
-//     elImg.onload = () => {
-//         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-//         drawText()
-//         setLineFocus()
-//     }
-// }
-
-function renderStoredMemes(storedMemes) {
-    let strHtml = ''
-    storedMemes.map(meme => {
-        strHtml += `
-        <div class="stored-meme" data-id="${meme.id}">
-        <img src="${meme.memeUrl}">
-        <button class="delete-meme" onclick="onDeleteStoredMeme('${meme.id}')" > Delete </button>
-        <button class="download-meme" onclick="onDownloadStoredMeme('${meme.id}')" > Download </button>
-        <button class="edit-meme" onclick="onEditStoredMeme('${meme.id}')" > Edit </button>
-        </div>
-    `
-        document.querySelector('.saved-meme-container').innerHTML = strHtml
-    })
-}
-
-function drawText() {
-    const meme = gMeme
-    const memeLines = meme.lines
-    memeLines.map((currLine) => {
-        gCtx.lineWidth = 2
-        gCtx.strokeStyle = currLine.stroke
-        gCtx.fillStyle = currLine.color
-        gCtx.font = `${currLine.size}px ${currLine.font}`
-        gCtx.textAlign = currLine.align
-        gCtx.textBaseline = 'middle'
-
-        gCtx.fillText(currLine.txt, currLine.positionX, currLine.positionY)
-        gCtx.strokeText(currLine.txt, currLine.positionX, currLine.positionY)
-    })
-}
-
-function onSetColor(color) {
-    setColor(color)
-    renderMeme()
-}
-
-function onTextSizeChange(val) {
-    if (val === '+') textSizeGrow()
-    else textSizeShrink()
-
-    renderMeme()
-}
-
-function setLineFocus() {
-    const line = getCurrLine()
-    if (!line || !line.isClicked) return
-
-    line.textWidth = gCtx.measureText(line.txt).width
-
-    gCtx.beginPath()
-    gCtx.rect(
-        line.positionX - (line.textWidth) / 2 - 10,
-        line.positionY - 25,
-        line.textWidth + 20,
-        line.size + 20
-    )
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'white'
-    gCtx.stroke()
-    gCtx.closePath()
-}
-
-
-
-
-
-
-
-//////////////////////EDITOR///////////////////////////
-
-function onUpdateLine(txt) {
-    setLineText(txt)
-    renderMeme()
-}
-
-function onSwitchLine() {
-    switchLine()
-    updatePlaceHolder(1)
-    renderMeme()
-}
-
-function updatePlaceHolder(val) {
-    const elPlaceholder = document.querySelector('.main-editor-text')
-    let currTextLine = getCurrLine()
-    if (val === 1) elPlaceholder.value = currTextLine.txt
-    else elPlaceholder.value = ''
-}
-
-//////////////////////GALLERY///////////////////////////
-
-function renderGallery() {
-    const imgs = getImgs()
-    const elGaleryContainer = document.querySelector('.gallery-container')
-    let strHtml = ''
-    imgs.map(img => {
-        strHtml +=
-            `<div class="card">
-        <img src="${img.url}" class="pic-grid" onclick="onSetImg(${img.id})">
-        </div>
-        `
-    })
-    // strHtml=`<img src='img/1.jpg' class="pic-grid">`
-
-    elGaleryContainer.innerHTML = strHtml
-}
-
-function onSetImg(id) {
-    const elGalleryPage = document.querySelector('.gallery-page')
-    const elEditorPage = document.querySelector('.editor-page')
-    setImg(id)
-    renderMeme()
-    displayEditor(elGalleryPage, elEditorPage)
-}
-
-function onAddLine() {
-    createLine()
-    updatePlaceHolder()
-    renderMeme()
-}
-
-function onKeyword(elBtn, val) {
-    handleKeyWords(elBtn)
-}
-
 
 function addAllListeners() {
     addMouseListeners()
@@ -223,7 +72,6 @@ function onDown(ev) {
 function onMove(ev) {
     const { isDragged } = getCurrLine()
     if (!isDragged) return
-    console.log('asd')
     const pos = getEvPos(ev)
     const dx = pos.x - gStartPos.x
     const dy = pos.y - gStartPos.y
@@ -237,24 +85,28 @@ function onUp() {
     document.body.style.cursor = 'grab'
 }
 
-
-function onSetFilterBy(filterVal) {
-    setGalleryFilter(filterVal)
-    renderGallery()
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
 }
 
-
-
-
-
-
-
-
-function getEvPos(ev) {
-    return {
+// TODO  touch events need to be fixed
+function getEvPos(ev) {         
+    let pos = {
         x: ev.offsetX,
-        y: ev.offsetY
+        y: ev.offsetY,
     }
+
+    if (TOUCH_EVS.includes(ev.type)) {
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+
+    }
+    return pos
 }
 
 function checkLineIsClicked(pos) {
@@ -284,14 +136,127 @@ function checkLineIsClicked(pos) {
     }
 }
 
-function onAlignBtn(direction) {
-    adjustLineAligntment(direction, gElCanvas.width)
-    drawText()
+function onCloseModal(modalName) {
+    const elmodal = document.querySelector(`${modalName}`)
+    closeModal(elmodal)
+}
+
+//////////////////////CANVAS///////////////////////////
+
+function renderMeme() {
+    const meme = getMeme()
+    const elImg = new Image()
+
+    const currImg = gImgs.find(img => img.id === meme.selectedImgId)
+    if (!currImg) return
+
+    const isUploadedImg = currImg.keywords.includes('upload')
+    if (isUploadedImg) elImg.src = `${currImg.url}`
+    else elImg.src = `img/${(meme.selectedImgId) + 1}.jpg`
+
+    elImg.onload = () => {
+        gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+        drawText()
+        setLineFocus()
+    }
+}
+
+function renderStoredMemes(storedMemes) {
+    let strHtml = ''
+    storedMemes.map(meme => {
+        strHtml += `
+        <div class="stored-meme" data-id="${meme.id}">
+        <img src="${meme.memeUrl}">
+        <button class="delete-meme" onclick="onDeleteStoredMeme('${meme.id}')" > Delete </button>
+        <button class="download-meme" onclick="onDownloadStoredMeme('${meme.id}')" > Download </button>
+        <button class="edit-meme" onclick="onEditStoredMeme('${meme.id}')" > Edit </button>
+        </div>
+    `
+        document.querySelector('.saved-meme-container').innerHTML = strHtml
+    })
+}
+
+function drawText() {
+    const meme = getMeme()
+    const memeLines = meme.lines
+    memeLines.map((currLine) => {
+        gCtx.lineWidth = 2
+        gCtx.strokeStyle = currLine.stroke
+        gCtx.fillStyle = currLine.color
+        gCtx.font = `${currLine.size}px ${currLine.font}`
+        gCtx.textAlign = currLine.align
+        gCtx.textBaseline = 'middle'
+
+        gCtx.fillText(currLine.txt, currLine.positionX, currLine.positionY)
+        gCtx.strokeText(currLine.txt, currLine.positionX, currLine.positionY)
+    })
+}
+
+function setLineFocus() {
+    const line = getCurrLine()
+    if (!line || !line.isClicked) return
+
+    line.textWidth = gCtx.measureText(line.txt).width
+
+    gCtx.beginPath()
+    gCtx.rect(
+        line.positionX - (line.textWidth) / 2 - 10,
+        line.positionY - 25,
+        line.textWidth + 20,
+        line.size + 20
+    )
+    gCtx.lineWidth = 2
+    gCtx.strokeStyle = 'white'
+    gCtx.stroke()
+    gCtx.closePath()
+}
+
+//////////////////////EDITOR///////////////////////////
+
+function onUpdateLine(txt) {
+    setLineText(txt)
     renderMeme()
+}
+
+function onSwitchLine() {
+    switchLine()
+    updatePlaceHolder(1)
+    renderMeme()
+}
+
+function updatePlaceHolder(val) {
+    const elPlaceholder = document.querySelector('.main-editor-text')
+    let currTextLine = getCurrLine()
+    if (val === 1) elPlaceholder.value = currTextLine.txt
+    else elPlaceholder.value = ''
 }
 
 function onFontChange(val) {
     fontChange(val)
+    renderMeme()
+}
+
+function onAddLine() {
+    createLine()
+    updatePlaceHolder()
+    renderMeme()
+}
+
+function onSetColor(color) {
+    setColor(color)
+    renderMeme()
+}
+
+function onTextSizeChange(val) {
+    if (val === '+') textSizeGrow()
+    else textSizeShrink()
+
+    renderMeme()
+}
+
+function onAlignBtn(direction) {
+    adjustLineAligntment(direction, gElCanvas.width)
+    drawText()
     renderMeme()
 }
 
@@ -305,6 +270,35 @@ function onMoveBtn(direction) {
     renderMeme()
 }
 
+//////////////////////GALLERY///////////////////////////
+
+function renderGallery() {
+    const imgs = getImgs()
+    const elGaleryContainer = document.querySelector('.gallery-container')
+    let strHtml = ''
+    imgs.map(img => {
+        strHtml +=
+            `<div class="card">
+        <img src="${img.url}" class="pic-grid" onclick="onSetImg(${img.id})">
+        </div>
+        `
+    })
+    elGaleryContainer.innerHTML = strHtml
+}
+
+function onSetImg(id) {
+    const elGalleryPage = document.querySelector('.gallery-page')
+    const elEditorPage = document.querySelector('.editor-page')
+    setImg(id)
+    renderMeme()
+    displayEditor(elGalleryPage, elEditorPage)
+}
+
+function onSetFilterBy(filterVal) {
+    setGalleryFilter(filterVal)
+    renderGallery()
+}
+
 function onFlexMeme() {
     const elGalleryPage = document.querySelector('.gallery-page')
     const elEditorPage = document.querySelector('.editor-page')
@@ -314,30 +308,12 @@ function onFlexMeme() {
     renderMeme()
 }
 
-
-function onCloseModal(modalName) {
-    const elmodal = document.querySelector(`${modalName}`)
-    closeModal(elmodal)
-
-}
-
-
-function onEditStoredMeme(id) {
-    const elGalleryPage = document.querySelector('.gallery-page')
-    const elEditorPage = document.querySelector('.editor-page')
-    const elSavedPage = document.querySelector('.saved-page')
-
-    const memeToLoad = gStoredMemes.find(meme => meme.id === id)
-    gMeme = memeToLoad.memeToSave
-    renderMeme()
-    closeModal(elSavedPage)
-    displayEditor(elGalleryPage, elEditorPage)
-}
-
+// function onKeyword(elBtn, val) {                     TODO
+//     handleKeyWords(elBtn)
+// }
 
 
 ///////////////////////////storage funcs////////////////////////////////
-
 
 function onSaveMeme() {
     const memeUrl = gElCanvas.toDataURL()
@@ -349,10 +325,21 @@ function onSaveMeme() {
     saveMemeToStorage(gStoredMemes)
 }
 
-
 function onLoadMeme() {
     let savedMeme = loadFromStorage(STORAGE_KEY)
     renderSavedMeme(savedMeme)
+}
+
+function onEditStoredMeme(id) {
+    const elGalleryPage = document.querySelector('.gallery-page')
+    const elEditorPage = document.querySelector('.editor-page')
+    const elSavedPage = document.querySelector('.saved-page')
+
+    const memeToLoad = gStoredMemes.find(meme => meme.id === id)
+    gMeme = memeToLoad.memeToSave
+    renderMeme()
+    closeModal(elSavedPage)
+    displayEditor(elGalleryPage, elEditorPage)
 }
 
 ///////////////////////////social funcs////////////////////////////////
@@ -389,9 +376,6 @@ function doUploadImg(imgDataUrl, onSuccess) {
     XHR.open('POST', '//ca-upload.com/here/upload.php')
     XHR.send(formData)
 }
-
-
-
 
 function onImgInput(ev) {
     const elGalleryPage = document.querySelector('.gallery-page')

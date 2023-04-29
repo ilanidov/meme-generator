@@ -1,15 +1,31 @@
 'use strict'
 const STORAGE_KEY = 'memeDB'
 
-let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
-// let gImgs = [{ id: 1, url: 'img/imgSquere/1.jpg', keywords: ['funny', 'cat'] }]
-
+const shortFunnySentences = [
+    "I can count potato",
+    "Brain cells come and go",
+    "Dyslexics teople poo",
+    "My life is a mess",
+    "I forgot how to",
+    "Slept on keyboard",
+    "I talk to myself",
+    "Wars come and go",
+    "Why so cereal?",
+    "Do skunks celebrate?",
+    "Sleep is overrated",
+    "I'm not arguing",
+    "I love deadlines",
+    "Burrito: food envelope",
+    "I need a nap"
+  ]
+// let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }    // cant filter by wordsClick  todo
 
 let gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
     lines: []
 }
+
 
 function getCurrLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
@@ -28,7 +44,6 @@ function setLineText(txt) {
     line.txt = txt
 }
 
-
 function displayGalery(elGalleryPage, elEditorPage) {
     elEditorPage.style.display = 'none'
     elGalleryPage.style.display = 'block'
@@ -39,10 +54,6 @@ function displayEditor(elGalleryPage, elEditorPage) {
     elEditorPage.style.display = 'flex'
 }
 
-function displaySaved() {
-
-}
-
 function setColor(color) {
     const line = getSelectedLine()
     line.color = color
@@ -50,12 +61,12 @@ function setColor(color) {
 
 function textSizeGrow() {
     const line = getSelectedLine()
-    line.size += 5
+    line.size += 2
 }
 
 function textSizeShrink() {
     const line = getSelectedLine()
-    line.size -= 5
+    line.size -= 2
 
 }
 
@@ -102,12 +113,10 @@ function switchLine() {
 
 function adjustLineAligntment(direction, canvasWidth) {
     const line = getSelectedLine()
-    console.log(line.textWidth)
     if (direction === 'left') line.positionX = line.textWidth / 2 + 12
     else if (direction === 'right') line.positionX = canvasWidth - (line.textWidth) / 2 - 12
     else line.positionX = canvasWidth / 2
 }
-
 
 function getSelectedLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
@@ -135,7 +144,6 @@ function moveBtn(direction) {
 function setLineDrag(isDragged) {
     const line = getCurrLine()
     line.isDragged = isDragged
-    // console.log(line)
 }
 
 
@@ -143,7 +151,6 @@ function moveLine(dx, dy) {
     const line = getCurrLine()
     line.positionX += dx
     line.positionY += dy
-    console.log(line)
 }
 
 
@@ -160,10 +167,6 @@ function loadStoredMemes() {
     if (!savedMemes) savedMemes = []
     return savedMemes
 }
-
-
-
-
 
 function createRandomMeme(gElCanvas) {
     const randomMeme = {
@@ -189,23 +192,7 @@ function createRandomMeme(gElCanvas) {
 }
 
 
-const shortFunnySentences = [
-    "I can count potato",
-    "Brain cells come and go",
-    "Dyslexics teople poo",
-    "My life is a mess",
-    "I forgot how to",
-    "Slept on keyboard",
-    "I talk to myself",
-    "Wars come and go",
-    "Why so cereal?",
-    "Do skunks celebrate?",
-    "Sleep is overrated",
-    "I'm not arguing",
-    "I love deadlines",
-    "Burrito: food envelope",
-    "I need a nap"
-  ]
+
   
 
   
@@ -215,10 +202,15 @@ function saveMemeToStorage(savedMemes) {
     saveToStorage(STORAGE_KEY, savedMemes)
 }
 
-function toggleMenu() {
-    document.body.classList.toggle('menu-open');
-}
 
+
+
+
+
+// function resetCanvas() {                           // not allowing to add a line - todo
+// 	gMeme.lines = []
+// 	gMeme.lines.push(createLine())
+// }
 
 
 
