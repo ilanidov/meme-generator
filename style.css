@@ -1,0 +1,22 @@
+/* BASICS */
+
+@import '/css/main.css';
+@import '/css/header.css';
+
+@import '/css/gallery.css';
+@import '/css/editor.css';
+
+/* COMPONENTS */
+@import '/css/footer.css';
+@import '/css/saved-meme.css';
+
+
+/* FONTS */
+/* @import 'fonts.css'; */
+
+
+
+
+
+/* MEDIA QUERIS */
+/* @import 'setup/mq.css'; */
