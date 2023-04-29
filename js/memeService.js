@@ -157,6 +157,9 @@ function moveLine(dx, dy) {
 function displaySaved(elModal) {
     elModal.classList.add('reveal-page')
 }
+function displayAbout(elModal) {
+    elModal.classList.add('reveal-page')
+}
 
 function closeModal(elModal) {
     elModal.classList.remove('reveal-page')

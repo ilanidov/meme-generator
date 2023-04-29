@@ -28,6 +28,7 @@ function onChangePage(txt) {
     const elGalleryPage = document.querySelector('.gallery-page')
     const elEditorPage = document.querySelector('.editor-page')
     const elSavedPage = document.querySelector('.saved-page')
+    const elAboutPage = document.querySelector('.about-page')
     switch (txt) {
         case 'Galery':
             displayGalery(elGalleryPage, elEditorPage)
@@ -38,6 +39,9 @@ function onChangePage(txt) {
         case 'Saved':
             displaySaved(elSavedPage)
             renderStoredMemes(loadStoredMemes())
+            break
+        case 'About':
+            displayAbout(elAboutPage)
             break
     }
 }
@@ -90,7 +94,7 @@ function toggleMenu() {
 }
 
 // TODO  touch events need to be fixed
-function getEvPos(ev) {         
+function getEvPos(ev) {
     let pos = {
         x: ev.offsetX,
         y: ev.offsetY,
