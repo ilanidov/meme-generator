@@ -30,7 +30,8 @@ function createImgs() {
         createImg(13, 'img/14.jpg', ['Human', 'Actor', 'Famous', 'Angry']),
         createImg(14, 'img/15.jpg', ['Human', 'Actor', 'Famous', 'Angry']),
         createImg(15, 'img/16.jpg', ['Human', 'Actor', 'Famous', 'Happy']),
-        createImg(16, 'img/17.jpg', ['Human', 'Actor', 'Famous', 'Angry'])
+        createImg(16, 'img/17.jpg', ['Human', 'Actor', 'Famous', 'Angry']),
+        createImg(17, 'img/18.jpg', ['Human', 'Actor', 'Famous', 'Angry'])
     ]
 }
 

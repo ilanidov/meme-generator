@@ -1,6 +1,7 @@
 /* BASICS */
 
 @import 'css/main.css';
+@import 'css/mq.css';
 @import 'css/header.css';
 
 @import 'css/gallery.css';

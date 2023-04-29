@@ -1,5 +1,4 @@
 .main-header {
-    width: 100%;
     display: flex;
     justify-content: space-between;
     height: 70px;
@@ -17,16 +16,4 @@
     color: #ffffff;
 }
 
-.main-nav {
-    /* border: 1px solid black; */
-    margin-right: 50px;
-}
 
-.main-nav>* {
-    width: 100px;
-    height: 100%;
-    background-color: inherit;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-}

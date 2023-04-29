@@ -215,7 +215,9 @@ function saveMemeToStorage(savedMemes) {
     saveToStorage(STORAGE_KEY, savedMemes)
 }
 
-
+function toggleMenu() {
+    document.body.classList.toggle('menu-open');
+}
 
 
 

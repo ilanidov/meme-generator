@@ -12,14 +12,21 @@
 
 <body onload="onInit()" class="main-layout">
 
-    <header class="main-header">
+    <div class="main-screen" onclick="toggleMenu()"></div>
+
+    <header class="strech main-header">
         <div class="logo">Meme Generator</div>
-        <nav class="main-nav">
+
+
+        <nav class="main-nav-container">
             <button onclick="onChangePage(this.innerText)" class="btn-galery">Galery</button>
             <button onclick="onChangePage(this.innerText)" class="btn-edit">Edit</button>
             <button onclick="onChangePage(this.innerText)" class="btn-saved">Saved</button>
             <button onclick="onChangePage(this.innerText)" class="btn-about">About</button>
         </nav>
+
+
+        <button class="btn-menu" onclick="toggleMenu()">☰</button>
     </header>
 
     <main class="main-content">
@@ -42,7 +49,8 @@
             <section class="nav-funcs">
 
                 <div class="search-options">
-                    <input list="keys" class="search-keys" name="search-keys" placeholder="Search" onchange="onSetFilterBy(this.value)">
+                    <input list="keys" class="search-keys" name="search-keys" placeholder="Search"
+                        onchange="onSetFilterBy(this.value)">
                     <datalist id="keys" class="search-key">
                         <option value="All"></option>
                         <option value="Happy">Happy</option>
@@ -87,49 +95,58 @@
                 <input oninput="onUpdateLine(this.value)" class="main-editor-text" type="text"
                     placeholder="Crack your Nut!">
 
-                <div class="main-editor-text-funcs">
-
-                    <div class="text-btns">
-                        <button onclick="onSwitchLine()" class="switch-line-btn"></button>
-                        <button onclick="onMoveBtn('up')" class="move-up-btn"></button>
-                        <button onclick="onMoveBtn('down')" class="move-down-btn "></button>
-                        <button onclick="onAddLine()" class="add-line-btn"> +</button>
-                        <button onclick="onDeleteLine()" class="delete-line-btn"></button>
-                        <!-- <button class="delete-line-btn"> &#1F5D1; </button> -->
-                    </div>
+                <div class="text-btns">
+                    <button onclick="onSwitchLine()" class="switch-line-btn"></button>
+                    <button onclick="onMoveBtn('up')" class="move-up-btn"></button>
+                    <button onclick="onMoveBtn('down')" class="move-down-btn "></button>
+                    <button onclick="onAddLine()" class="add-line-btn"> +</button>
+                    <button onclick="onDeleteLine()" class="delete-line-btn"></button>
                 </div>
 
-                <!-- <div class="main-editor-style-funcs"> -->
                 <div class="style-btns">
-                    <button onclick="onTextSizeChange('+')" class="font-up-btn"></button>
-                    <button onclick="onTextSizeChange('-')" class="font-down-btn"></button>
-                    <button class="color-change-btn">
-                        <input oninput="onSetColor(this.value)" class="color-txt-input" type="color" name="" id="">
-                    </button>
-                    <button onclick="onAlignBtn('left')" class="align-left-btn"></button>
-                    <button onclick="onAlignBtn('center')" class="align-center-btn"></button>
-                    <button onclick="onAlignBtn('right')" class="align-right-btn"></button>
+                    <div class="style-funcs-1">
+                        <div class="style-size-color-btns">
+                            <button onclick="onTextSizeChange('+')" class="font-up-btn"></button>
+                            <button onclick="onTextSizeChange('-')" class="font-down-btn"></button>
+                            <button class="color-change-btn">
+                                <input oninput="onSetColor(this.value)" class="color-txt-input" type="color" name=""
+                                    id="">
+                            </button>
+                        </div>
 
-                    <select name="font-change" class="font-change" onchange="onFontChange(this.value)">
-                        <option value="Impact">Impact</option>
-                        <option value="Arial">Arial</option>
-                        <option value="Georgia">Georgia</option>
-                    </select>
+                        <div class="align-btns">
+                            <button onclick="onAlignBtn('left')" class="align-left-btn"></button>
+                            <button onclick="onAlignBtn('center')" class="align-center-btn"></button>
+                            <button onclick="onAlignBtn('right')" class="align-right-btn"></button>
+                        </div>
+                    </div>
+
+                    <div class="style-funcs-2">
+                        <select name="font-change" class="font-change" onchange="onFontChange(this.value)">
+                            <option value="Impact">Impact</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Georgia">Georgia</option>
+                        </select>
+                    </div>
 
 
                 </div>
-                <!-- </div> -->
 
-                <div class="main-editor-emoj"></div>
+                <!-- <div class="main-editor-emoj">
+
+                </div> -->
+
                 <button onclick="onSaveMeme()" class="save-btn">Save your Meme!</button>
-                <!-- <button onclick="onLoadMeme()" class="save-btn">load</button> -->
 
                 <div class="media-share">
                     <button onclick="onUploadImg()" class="share-btn">Share</button>
+
                     <button class="download-btn">Download
                         <a href="#" class="download-tag" onclick="downloadImg(this)" download="my-img.jpg"></a>
                     </button>
+                    
                 </div>
+
             </div>
 
 
@@ -140,7 +157,7 @@
     </main>
 
 
-    <footer class="main-footer">footer</footer>
+    <footer class=" strech main-footer"></footer>
 
 
     <script src="js/storage.js"></script>

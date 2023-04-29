@@ -1,11 +1,9 @@
 .editor-page {
-    height: 100%;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     display: none;
-    /* background-image: url("./img-bgc.1.png"); */
+    height: 100%;
 }
 
 .editor-page>* {
@@ -14,6 +12,8 @@
 
 canvas {
     border-radius: 25px;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -21,36 +21,26 @@ canvas {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 530px;
-    height: 550px;
     border: 1px solid black;
-    position: relative;
+    /* position: relative; */
     align-items: center;
 }
 
 .main-editor>* {
-    border: 1px solid black;
+    margin: 5px;
+    width: 90%;
 }
 
 .main-editor-text {
-    margin-top: 10px;
-    align-self: center;
-    width: 445px;
-    height: 57px;
+    height: 3.5625rem;
     box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
-    border-radius: 28px;
+    border-radius: 25px;
     background-color: #ebeef3;
     color: #3d3d3d;
     text-align: center;
-    font-size: 25px;
+    font-size: 1.5625rem;
 }
 
-.style-btns>* {
-    width: 55px;
-    height: 50px;
-    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
-    border-radius: 10px;
-}
 
 .text-btns {
     display: flex;
@@ -59,20 +49,50 @@ canvas {
 }
 
 .text-btns>* {
-    margin: 5px;
-    height: 60px;
-    width: 55px;
+    height: 50px;
+    width: 20%;
     border-radius: 15px;
-
 }
 
-
 .style-btns {
-    width: 445px;
-    height: 151px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
     border-radius: 15px;
     background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
 }
+
+.style-btns>* {
+    display: flex;
+    justify-content: space-around;
+    margin: 5px;
+}
+
+.style-funcs-1>*{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.style-size-color-btns>*{
+    margin: 2px;
+}
+
+.style-funcs-2>*{
+    width: 200px;
+    height: 50px;
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
+    font-size: large;
+}
+
+.style-btns button {
+    width: 100%;
+    height: 50px;
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
+}
+
 
 .switch-line-btn {
     background-image: url('../btnImg/replace-icon.png');
@@ -81,6 +101,7 @@ canvas {
     background-position: center;
     background-color: #2cb5db;
 }
+
 .move-up-btn {
     background-image: url('../btnImg/up-arrow-icon.png');
     background-size: 30px 30px;
@@ -88,6 +109,7 @@ canvas {
     background-position: center;
     background-color: #33be6d;
 }
+
 .move-down-btn {
     background-image: url('../btnImg/down-arrow-icon.png');
     background-size: 30px 30px;
@@ -95,6 +117,7 @@ canvas {
     background-position: center;
     background-color: #33be6d;
 }
+
 .delete-line-btn {
     background-image: url('../btnImg/delete-icon.png');
     background-size: 30px 30px;
@@ -102,6 +125,7 @@ canvas {
     background-position: center;
     background-color: #e06464;
 }
+
 .add-line-btn {
     background-image: url('../btnImg/plus-icon.png');
     background-size: 30px 30px;
@@ -109,6 +133,7 @@ canvas {
     background-position: center;
     background-color: #33be6d;
 }
+
 .align-center-btn {
     background-image: url('../btnImg/icon-center.png');
     background-size: 30px 30px;
@@ -154,48 +179,46 @@ canvas {
     background-position: center;
 }
 
+
+
 .main-editor-emoj {
-    width: 445px;
-    height: 91px;
+    height: 70px;
     border-radius: 45px;
     background-color: #ffffff;
 }
 
 .save-btn {
-    width: 420px;
     height: 50px;
     border-radius: 45px;
-
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
 }
 
 .media-share {
     display: flex;
     justify-content: space-around;
     margin-bottom: 10px;
+    height: 50px;
 }
 
 .media-share>* {
-    width: 210px;
-    height: 50px;
+    flex-grow: 1;
     border-radius: 15px;
-    /* box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff; */
 }
 
 .share-btn {
-    /* box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff; */
     background-color: #1e7cd3;
 }
 
 
-.download-btn{
+.download-btn {
     background-color: #b076d9;
     position: relative;
     justify-content: center;
     align-items: center;
 }
 
-.download-tag{
-    text-decoration:none;
+.download-tag {
+    text-decoration: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -204,6 +227,7 @@ canvas {
     opacity: 0;
 }
 
-.save-btn{
-    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+.main-editor-emoj{
+    height: 30px;
+    background-color: #ebeef3;
 }
