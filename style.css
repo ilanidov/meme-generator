@@ -14,11 +14,4 @@
 
 
 /* FONTS */
-/* @import 'fonts.css'; */
-
-
-
-
-
-/* MEDIA QUERIS */
-/* @import 'setup/mq.css'; */
+@import 'css/fonts.css';

@@ -49,6 +49,11 @@ function onChangePage(txt) {
 function addAllListeners() {
     addMouseListeners()
     addTouchListeners()
+
+    window.addEventListener('resize', () => {
+		// resizeCanvas()
+		renderMeme()
+	})
 }
 
 function addMouseListeners() {
@@ -141,8 +146,14 @@ function checkLineIsClicked(pos) {
 }
 
 function onCloseModal(modalName) {
+
     const elmodal = document.querySelector(`${modalName}`)
     closeModal(elmodal)
+}
+
+function onCloseAboutModal(){
+    const elModal = document.querySelector('.about-page')
+    elModal.style.display = 'none'
 }
 
 //////////////////////CANVAS///////////////////////////
@@ -159,6 +170,7 @@ function renderMeme() {
     else elImg.src = `img/${(meme.selectedImgId) + 1}.jpg`
 
     elImg.onload = () => {
+        resizeCanvas()
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
         setLineFocus()

@@ -17,7 +17,7 @@ const shortFunnySentences = [
     "I love deadlines",
     "Burrito: food envelope",
     "I need a nap"
-  ]
+]
 // let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }    // cant filter by wordsClick  todo
 
 let gMeme = {
@@ -25,7 +25,6 @@ let gMeme = {
     selectedLineIdx: 0,
     lines: []
 }
-
 
 function getCurrLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
@@ -146,19 +145,18 @@ function setLineDrag(isDragged) {
     line.isDragged = isDragged
 }
 
-
 function moveLine(dx, dy) {
     const line = getCurrLine()
     line.positionX += dx
     line.positionY += dy
 }
 
-
 function displaySaved(elModal) {
     elModal.classList.add('reveal-page')
 }
+
 function displayAbout(elModal) {
-    elModal.classList.add('reveal-page')
+    elModal.style.display='block'
 }
 
 function closeModal(elModal) {
@@ -177,8 +175,8 @@ function createRandomMeme(gElCanvas) {
         selectedLineIdx: 0,
         lines: [
             {
-                txt:  shortFunnySentences[getRandomInt(0,14)],
-                size: getRandomInt(25,45),
+                txt: shortFunnySentences[getRandomInt(0, 14)],
+                size: getRandomInt(25, 45),
                 align: 'center',
                 color: getRandomColor(),
                 font: 'Impact',
@@ -194,26 +192,14 @@ function createRandomMeme(gElCanvas) {
     return randomMeme
 }
 
-
-
-  
-
-  
-
+function resizeCanvas() {
+    const elCanvasContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elCanvasContainer.offsetWidth
+    gElCanvas.height = elCanvasContainer.offsetHeight
+}
 
 function saveMemeToStorage(savedMemes) {
     saveToStorage(STORAGE_KEY, savedMemes)
 }
-
-
-
-
-
-
-// function resetCanvas() {                           // not allowing to add a line - todo
-// 	gMeme.lines = []
-// 	gMeme.lines.push(createLine())
-// }
-
 
 

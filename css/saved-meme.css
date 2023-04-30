@@ -37,7 +37,6 @@
     background-color: inherit;
     width: 50px;
     height: 40px;
-
 }
 
 .saved-header {
@@ -48,7 +47,6 @@
 .stored-meme{
     height: 200px;
     width: 200px;
-    /* height: 100%; */
 }
 
 .stored-meme img{
