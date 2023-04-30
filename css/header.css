@@ -14,11 +14,16 @@
     justify-content: center;
     color: #ffffff;
     margin-right: 10px;
+    font-size:x-large;
 }
 
 .main-nav-container{
     padding: 5px;
 }
+
+/* .main-nav-container>*{
+    font-size:x-large;
+} */
 
 
 
