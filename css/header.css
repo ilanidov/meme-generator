@@ -9,11 +9,16 @@
     display: flex;
     width: 200px;
     height: 60px;
-    margin-left: 50px;
+    margin-left: 5px;
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    /* font-family: BrunoAce; */
+    margin-right: 10px;
 }
+
+.main-nav-container{
+    padding: 5px;
+}
+
 
 

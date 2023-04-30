@@ -8,3 +8,7 @@
 button{
     cursor: pointer;
 }
+button:hover{
+border: 1px solid aliceblue ;
+}
+
